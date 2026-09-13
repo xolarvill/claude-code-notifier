@@ -1,0 +1,9 @@
+# Build output -- run build.cmd to produce it.
+notify-taskbar.exe
+
+# Runtime log written by the hook.
+notify-taskbar.log
+
+# csc detritus
+*.pdb
+*.obj

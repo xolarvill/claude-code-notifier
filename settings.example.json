@@ -1,0 +1,39 @@
+{
+  "_comment": [
+    "Merge the 'hooks' and 'preferredNotifChannel' keys into",
+    "%USERPROFILE%\\.claude\\settings.json -- do not replace the whole file.",
+    "Point 'command' at wherever you put notify-taskbar.exe.",
+    "\"args\": [] selects the exec form: the binary is spawned directly, with no",
+    "shell, so backslashes in the path never reach a shell parser.",
+    "Hook configuration is read at startup -- restart Claude Code afterwards."
+  ],
+
+  "preferredNotifChannel": "terminal_bell",
+
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Users\\YOU\\.claude\\notify-taskbar.exe",
+            "args": [],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Users\\YOU\\.claude\\notify-taskbar.exe",
+            "args": [],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
