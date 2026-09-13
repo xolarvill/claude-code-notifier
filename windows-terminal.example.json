@@ -1,0 +1,92 @@
+// Windows Terminal — notification and appearance settings.
+//
+// This is a valid, self-contained settings.json: Windows Terminal fills in
+// everything not listed here from its own defaults, so you can drop this in
+// as-is. It does NOT include the profiles list, keybindings, or language —
+// see "What is not here" at the bottom.
+//
+// Where it goes (Microsoft Store install):
+//   %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+// Unpackaged install:
+//   %LOCALAPPDATA%\Microsoft\Windows Terminal\settings.json
+//
+// You can also just copy the "profiles" → "defaults" block into your own
+// settings.json. Only "bellStyle" is required for the notifier to work.
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    // ---------------------------------------------------------- notification
+    //
+    // This is the setting the notifier depends on. Windows Terminal flashes
+    // the taskbar button on a BEL character, and Claude Code writes one
+    // whenever it notifies. Without "taskbar" here, the notifier's window
+    // search still succeeds but nothing visible happens.
+    //
+    // "audible" also plays a sound. Drop it for a silent flash:
+    //     "bellStyle": ["taskbar"]
+    "profiles": {
+        "defaults": {
+            "bellStyle": [
+                "audible",
+                "taskbar"
+            ],
+
+            // ------------------------------------------------------ appearance
+
+            // Not defined in a "schemes" array anywhere — this resolves
+            // against Windows Terminal's bundled schemes. Dimidium has been
+            // built in since v1.23.12681.0; on anything older this falls back
+            // to the default scheme with a warning.
+            "colorScheme": "Dimidium",
+
+            "cursorShape": "filledBox",
+
+            // "Maple Mono NF CN" is NOT bundled with Windows Terminal — it
+            // must be installed separately (it is a Nerd Font). Without it,
+            // Terminal falls back to the default face.
+            "font": {
+                "face": "Maple Mono NF CN",
+                "size": 11,
+                "weight": "medium"
+            },
+
+            // Render bold text as bright colors in addition to bold.
+            "intenseTextStyle": "all",
+
+            // 85% opaque over acrylic.
+            "opacity": 85,
+            "useAcrylic": true,
+
+            // Rainbow-colored command suggestions.
+            "experimental.rainbowSuggestions": true
+        }
+    },
+
+    // Keep the acrylic effect on the window when it loses focus.
+    "compatibility.enableUnfocusedAcrylic": true,
+
+    // The tab row stays solid, so tabs remain readable over the acrylic body.
+    "useAcrylicInTabRow": false,
+
+    // Initial window height, in rows.
+    "initialRows": 45
+}
+
+// ---------------------------------------------------------------------------
+// What is not here
+//
+// Left out because it is machine-specific, not notification/appearance, and
+// would clobber your setup if you pasted it over your own file:
+//
+//   profiles.list          the shell profiles (their GUIDs are fixed by
+//                          Windows Terminal, but which ones you show is yours)
+//   defaultProfile         a GUID — pick your own in Settings → Startup
+//   keybindings            ctrl+c / ctrl+v / alt+shift+d rebinds
+//   language               zh-Hans
+//   newTabMenu             newTabPosition
+//   historySize            scrollback, a behaviour not an appearance setting
+//   copyFormatting         copyOnSelect
+//   experimental.repositionCursorWithMouse
+//
+// To export the whole thing instead:
+//   copy "%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" .

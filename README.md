@@ -164,14 +164,18 @@ permanent, e.g. `%USERPROFILE%\.claude\`.
 shell, so backslashes in the path never reach a shell parser. See
 `settings.example.json`.
 
-**3. Windows Terminal bell style.** So the native `terminal_bell` channel (and
-Claude Code's own notifications) flash too:
+**3. Windows Terminal bell style.** Windows Terminal flashes the taskbar button
+on a BEL character. Without `"taskbar"` in `bellStyle`, the notifier still finds
+the window and still calls `FlashWindowEx` — nothing visible happens.
 
 ```jsonc
 "profiles": { "defaults": { "bellStyle": ["taskbar"] } }
 ```
 
-Drop `"audible"` if you do not want a sound on permission prompts.
+`windows-terminal.example.json` in this repo is a working settings file built
+from a real setup, covering the bell plus font, scheme, opacity and acrylic.
+Copy it in whole, or just take the `bellStyle` line. Drop `"audible"` if you do
+not want a sound on permission prompts.
 
 **4. Restart Claude Code.** Hook configuration is read at startup.
 
@@ -233,9 +237,10 @@ Remove the `hooks` block from `settings.json`, or set `"disableAllHooks": true`.
 ## Layout
 
 ```
-notify-taskbar.cs       single-file source; all P/Invoke, no dependencies
-build.cmd               csc invocation
-settings.example.json   sanitized hook configuration
+notify-taskbar.cs                single-file source; all P/Invoke, no dependencies
+build.cmd                        csc invocation
+settings.example.json            sanitized Claude Code hook configuration
+windows-terminal.example.json    Windows Terminal notification + appearance settings
 ```
 
 ## License
