@@ -1,4 +1,4 @@
-# claude-code-notifier
+# claude-code-windows-notifier
 
 Taskbar-flash notifications for Claude Code on Windows — the same "keep blinking
 until you come back" behaviour WeChat uses.
